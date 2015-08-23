@@ -1,0 +1,47 @@
+Predict the next word (SwiftKey)
+========================================================
+author: Andres Rodriguez C.
+date: 22/08/2015
+
+Data Science Specialization
+Johns Hopkins University Coursera
+
+Introduction
+========================================================
+
+The app seeks to predict the next word based on the previously typed text by the user (only for English language). The model predictive of app is created using a specific body of text extracted from Internet, with the help of Natural Language Processing tools and techniques are used to perform statistical analysis.
+
+* The application is deployed on [Rstudio's shiny server](http://anroco.shinyapps.io/PredictNextWord).
+
+* The application source code is hosted on [github](https://github.com/anroco/PredictNextWord).
+
+The app is intended to put in evidence the knowledge acquired during the course of Data Science specialization at Johns Hopkins in Coursera
+
+Data Processing
+========================================================
+
+The app predicts words using an n-gram model, defining more specifically uni-, bi-, tri- and 4-gram.
+
+* For this project is used a sample of the 1% of the data provided by the three types of sources of information (twitter, blogs and news).
+* In the cleaning of the data, the numbers, punctuation, two or more continuous spaces and bad words are removed from the data.
+* Then they are built different n-grams that will be used to predict the next word, which are stored in separate files sorted by frequency of occurrence of each text.
+
+For more information on this process, [MileStone Report](http://rpubs.com/anroco/milestone_report_rubric)
+
+Algorithm
+========================================================
+
+The model uses the concept of Backoff algorithm. The algorithm will try to find a match in a higher n-gram, before regressing into a lower n-grams if matches are not found.
+
+If typed text is longer than or equal to 3 words, the algorithm compare the last 3 words of typed text with the first 3 words of the 4-grams model. If no match, the algorithm back off and compare the last 2 words of typed text with the first 2 words of the 3-grams. If no match, the algorithm back off and compare the last word of typed text with the first word of the 2-grams. If no match, the algorithm get the top 10 words of the 1-grams.
+
+If the typed text is less than three words, the algorithm fits the best available n-gram, repeating the process of back off.
+
+App Instructions
+========================================================
+
+The [application](http://anroco.shinyapps.io/PredictNextWord) is easy to use, this is divided into two sections:
+
+* On the left side you will find a panel with a text box in which the words or phrases are typed, these will serve as basis for predicting the next word.
+
+* On the right side you will find two tabs, the first tab (Next word) will show a list with the five words which are the strongest options on the prediction based on the entered text, options are sorted in descending certainty. The second tab (help) contain information of interest of the app.

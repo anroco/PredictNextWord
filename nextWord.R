@@ -11,6 +11,7 @@ loadData <- function(){
 
 cleanInputText <- function(text, n=3){
     n <- ifelse(n < 0, 0, n)
+    text <- trimws(text)
     text <- stripWhitespace(text)
     text <- tolower(text)
     text <- removeNumbers(text)
@@ -38,7 +39,3 @@ getNextWord <- function(text, n=3){
     }
     head(unique(predictWord), 5)
 }
-
-set.seed(12345)
-loadData()
-
